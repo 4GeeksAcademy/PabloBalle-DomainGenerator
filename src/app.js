@@ -2,11 +2,6 @@
 import "bootstrap";
 import "./style.css";
 
-let pronoun = ["the", "our"];
-let adj = ["great", "big"];
-let noun = ["joggeres", "racom"];
-let prefix = [".com", ".es", ".org", ".net"];
-
 function generateDomainNames(pronoun, adj, noun, prefix) {
   let domainNames = [];
 
@@ -21,24 +16,33 @@ function generateDomainNames(pronoun, adj, noun, prefix) {
             // Combinar los elementos de las listas sin "com" y agregar el sufijo ".com"
             let domainName = pronoun[i] + adj[j] + cleanNoun + prefix[l];
             domainNames.push(domainName);
-          } else if (noun[k].endsWith("com") && prefix[l] === ".com") {
+          }
+
+          if (noun[k].endsWith("com") && prefix[l] === ".com") {
             // Combinar los elementos de las listas y agregar el sufijo ".com"
             let cleanNoun = noun[k].slice(0, -3);
             // Combinar los elementos de las listas sin "com" y agregar el sufijo ".com"
             let domainName = pronoun[i] + adj[j] + cleanNoun + prefix[l];
             domainNames.push(domainName);
-          } else {
-            let domainName = pronoun[i] + adj[j] + noun[k] + prefix[l];
-            domainNames.push(domainName);
           }
+
+          let domainName = pronoun[i] + adj[j] + noun[k] + prefix[l];
+          domainNames.push(domainName);
         }
       }
     }
   }
+
   let randomDomain =
     domainNames[Math.floor(Math.random(domainNames) * domainNames.length)];
+
   return randomDomain;
 }
+
+let pronoun = ["the", "our"];
+let adj = ["great", "big"];
+let noun = ["joggeres", "racom"];
+let prefix = [".com", ".es", ".org", ".net"];
 
 console.log(generateDomainNames(pronoun, adj, noun, prefix));
 
